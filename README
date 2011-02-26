@@ -1,0 +1,13 @@
+This projects include the shell utility tools I've made for my project's use.
+If you would like to have a try, please make sure you installed the following 
+libs or applications (subject to change):
+* pexpect
+* django
+* cloc
+
+Please modify the code to behave properly for your projects.
+
+django_shell [-t]: run django shell. Automatically import modules you desired.
+django_cloc: generate code summary.
+.bash_profile: helper function for your virtualenv. Please merge it with your .bash_profile.
+
