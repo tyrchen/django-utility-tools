@@ -1,0 +1,9 @@
+#!/bin/bash
+# please run this under a django project
+LOG_DIR=thoughts/log
+TMP=$LOG_DIR/tmp.yaml
+FILENAME=$LOG_DIR/`date +%Y%m%d`.yaml
+cloc . --exclude-dir vendors,bing,xgoogle
+cloc . --exclude-dir vendors,bing,xgoogle -yaml --report-file=$TMP
+sed '/---/d' $TMP>$FILENAME
+rm $TMP

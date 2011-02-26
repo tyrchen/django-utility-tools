@@ -7,7 +7,7 @@ libs or applications (subject to change):
 
 Please modify the code to behave properly for your projects.
 
-django_shell [-t]: run django shell. Automatically import modules you desired.
-django_cloc: generate code summary.
-.bash_profile: helper function for your virtualenv. Please merge it with your .bash_profile.
+django-shell [-t]: run django shell. Automatically import modules you desired.
+django-cloc: generate code summary.
+.bash_profile: helper function for your virtualenv. Please merge it with your .bash_profile. You can use ve <env-name> then.
 

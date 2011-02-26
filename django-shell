@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# run this program under django project
+import os
+import pexpect
+from optparse import OptionParser
+
+def send_cmd(shell, cmd):
+  shell.expect('>>> ')
+  shell.sendline(cmd)
+
+def import_modules(shell):
+  # load some basic modules you are using repeatly when doing shell
+  send_cmd(shell, 'from mongoengine import *')
+  send_cmd(shell, 'from django.test.client import Client')
+  send_cmd(shell, 'from django.core.urlresolvers import reverse')
+  send_cmd(shell, 'from django.template.defaultfilters import slugify')
+  # load your own models
+  send_cmd(shell, 'from profiles.models import *')
+
+def load_basic_data(shell):
+  # this is an example, you can load your own data
+  send_cmd(shell, 'user = Profile.objects(username="tchen")')
+
+parser = OptionParser()
+parser.add_option('-t', '--test', action='store_true', dest='is_test', default=False, help='load test database')
+
+options, args = parser.parse_args()
+
+shell = pexpect.spawn('./manage.py shell')
+
+import_modules(shell)
+load_basic_data(shell)
+
+if options.is_test:
+  # this is for mongodb, please modify for your own db.
+  send_cmd(shell, 'connect("test_db")')
+  send_cmd(shell, 'test = Profile.create_user("test", "test", "test@test.com")')
+
+shell.interact()
